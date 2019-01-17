@@ -20,7 +20,7 @@ RewriteRule ^(.*)$ https://www.example.com/$1 [R,L]
 
 -------------------------------------------**/
 
-3: #Redirect index.html file to the domain itself
+3: Redirect index.html file to the domain itself
 
 /**-------------------------------------------
 
@@ -33,7 +33,6 @@ RewriteRule ^(.*)index.html$ /$1 [R=301,L]
 
 4: This will redirect http://www.example.com/ to http://example.com/
 
-#Force non-www:
 /**-------------------------------------------
 
 RewriteEngine on
@@ -42,8 +41,17 @@ RewriteRule ^(.*)$ http://example.com/$1 [L,R=301]
 
 -------------------------------------------**/
 
+5: Redirect http to https enabled domain
+/**--------------------------------------
 
-5: Enable gzip compression using the .htaccess file for Apache
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+-------------------------------------------**/
+
+
+6: Enable gzip compression using the .htaccess file for Apache
 
 /**-------------------------------------------
 
